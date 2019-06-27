@@ -21,19 +21,35 @@ function slapToysOnDOM(toys){
     //create divs for each toy object
     const div = document.createElement("div")
     div.className = "card"
-    console.log(div)
+    // console.log(div)
     div.innerHTML=`<h2>${toy.name}</h2> <img src="${toy.image}" class="toy-avatar"> <p>"${toy.likes} Likes"</p> <button class="like-btn">Like <3</button>`
     toyCollection.append(div)
   })
 }
 
+const form = document.querySelector("form")
+console.log(form)
 
-// Each card should have the following child elements:
-//
-//   * `h2` tag with the toy's name
-//   * `img` tag with the `src` of the toy's image attribute and the class name "toy-avatar"
-//   * `p` tag with how many likes that toy has
-//   * `button` tag with an class "like-btn"
+form.addEventListener("submit", function(event){
+  // event.preventDefault();
+  // if event.target === "submit"
+  fetch("http://localhost:3000/toys", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "name": form.name.value,
+      "image": form.image.value
+    })
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+
+  // console.log(response.json())
+
+
+})
 
 
 
