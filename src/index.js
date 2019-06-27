@@ -1,8 +1,11 @@
 const addBtn = document.querySelector('#new-toy-btn')
 const toyForm = document.querySelector('.container')
+const form = document.querySelector('.add-toy-form')
+let toyCollection = document.querySelector("#toy-collection")
 let addToy = false
 
 // YOUR CODE HERE
+
 
 addBtn.addEventListener('click', () => {
   // hide & seek with the form
@@ -17,56 +20,76 @@ addBtn.addEventListener('click', () => {
 
 
 // OR HERE!
+form.addEventListener("submit", postNewToy)
+
+function postNewToy(event){
+  event.preventDefault()
+  fetch("http://localhost:3000/toys", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: event.target.name.value,
+      image: event.target.image.value
+    })
+  })
+  .then(response => response.json())
+  .then(displayNewToy)
+
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function(){
 
   fetch("http://localhost:3000/toys")
   .then(response => response.json())
-  .then(x => {
-    createLi(x)
-    x.forEach(img => {
-      let element = document.createElement("div")
+  .then(data => {
+    // createLi(data)
+    data.forEach(eli => {
       // element.classList.add('card')
-      element.innerHTML = `
+      toyCollection.innerHTML += `
           <div class="card">
-            <h2>${img.name}</h2>
-            <img src="${img.image}" class="toy-avatar" />
-            <p>${img.likes} </p>
+            <h2>${eli.name}</h2>
+            <img src="${eli.image}" class="toy-avatar" />
+            <p>${eli.likes} </p>
             <button class="like-btn">Like <3</button>
-          </div>
-      `
-      // element.name = <h2 class="toy-header"> ${img.name} </h2>
-      // element.src = img.image
-      // element.likes = img.likes
-
-      document.querySelector("#toy-collection").append(element)
-
+          </div>`
     }
-
     )
   })
 })
 
 
 
-function createLi(toyArray) {
-  let div = document.createElement('div')
-  div.setAttribute('class', 'card')
-  div.setAttribute('class', 'toy-avatar"')
-  toyCollection.appendChild(div)
-  console.log(toyArray)
-  toyArray.forEach(function(div){
-    const div1 = document.createElement("div")
-    div.id = "toyArray" + toyArray.id
-    // /div.className = "card"
+function displayNewToy(toy) {
+  // let div = document.createElement('div')
+  // let img = document.createElement('img')
+  // let h2 = document.createElement('h2')
+  // let p = document.createElement('p')
+  // let button = document.createElement('button')
+  //
+  // div.className = 'card'
+  // img.className = "toy-avatar"
+  // img.src = `${toy.image}`
+  // p.innerText = `${toy.likes}`
+  // button.className = "like-btn"
+  // button.innerText = "Like <3"
+  //
+  // div.append(h2)
+  // div.append(img)
+  // div.append(p)
+  // div.append(button)
+  // toyCollection.append(div)
 
-    div.innerText = toyArray.name
-
-
-    div.innerText = toyArray.likes
-
-    // work on reffering to dom - show on pg
-  })
+  toyCollection.innerHTML += `
+  <div class="card">
+    <h2>${toy.name}</h2>
+    <img src=${toy.image} class="toy-avatar" />
+    <p>${toy.likes} Likes </p>
+    <button class="like-btn">Like <3</button>
+  </div>
+  `
+  form.reset()
 }
-``
+
 // div()
-let toyCollection = document.querySelector("#toy-collection")
