@@ -40,7 +40,7 @@ form.addEventListener("submit", function(event){
     },
     body: JSON.stringify({
       "name": form.name.value,
-      "image": form.image.value
+      "image": form.image.valuelearn 
     })
   })
   .then(response => response.json())
