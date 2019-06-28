@@ -27,6 +27,7 @@ addBtn.addEventListener('click', () => {
     toyForm.style.display = 'none'
   }
 })
+
 function addToys(toyItems){
   const toyDiv = document.querySelector("#toy-collection")
   toyItems.forEach(function(toyItem){
