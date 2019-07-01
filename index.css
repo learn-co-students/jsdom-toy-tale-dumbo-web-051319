@@ -3,7 +3,7 @@ body {
   font-family: monospace;
 }
 
-#toy-header {
+#cat-header {
   display: flex;
   justify-content: center;
   background: #515DA2;
@@ -12,12 +12,12 @@ body {
   padding: 1rem;
 }
 
-#toy-header img {
+#cat-header img {
   height: 6rem;
   width: auto;
 }
 
-#toy-collection {
+#cat-collection {
   margin: 2rem;
 }
 
@@ -32,7 +32,7 @@ body {
   box-shadow: 3px 4px #e04b52
 }
 
-.toy-avatar {
+.cat-avatar {
   justify-self: center;
   height: 12rem;
   width: auto;
@@ -65,7 +65,7 @@ button:hover {
   opacity: .8;
 }
 
-.add-toy-form {
+.add-cat-form {
   width: 80%
 }
 
